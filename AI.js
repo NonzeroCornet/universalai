@@ -2,6 +2,7 @@ var scenarios = [];
 var outputs = 0;
 var lastIndex = 0;
 var lastIndexIndex = 0;
+var brainOut = document.getElementById("brain");
 setTimeout(function () {
   scenarios = eval(prompt("Import Brain (Leave as [] to create new):", "[]"));
   outputs = prompt("Number of possible outputs in general:");
@@ -30,9 +31,14 @@ function update() {
       }
     }
   }
+
+  if (JSON.stringify(scenarios[0]) === "[0,[0]]") {
+    scenarios.shift();
+  }
   var Continue = confirm(
     "Current Brain (Press cancel to end): " + JSON.stringify(scenarios)
   );
+  brainOut.innerHTML = "Brain: <br><br>" + JSON.stringify(scenarios);
   Continue ? update() : Continue;
 }
 
